@@ -1,0 +1,10 @@
+// Variables - Tema Ambiental Claro
+$green-50: #f0fdf4;
+$green-100: #dcfce7;
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(180deg, $green-50 0%, #ffffff 50%, $green-50 100%);
+  color: #1e293b;
+}

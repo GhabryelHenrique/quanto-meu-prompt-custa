@@ -1,0 +1,489 @@
+<main class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="leaf-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+        </svg>
+      </div>
+      <h1 class="title">Quanto Custa Meu Prompt?</h1>
+      <p class="subtitle">
+        Descubra o impacto ambiental do uso de Inteligência Artificial
+      </p>
+    </div>
+  </header>
+
+  <!-- Introdução -->
+  <section class="intro">
+    <div class="intro-card">
+      <div class="icon water-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2z"/>
+        </svg>
+      </div>
+      <div class="intro-text">
+        <h3>Por que isso importa?</h3>
+        <p>
+          Data centers que processam IA consomem grandes quantidades de água para resfriamento
+          e energia elétrica para operação. Cada consulta tem um custo ambiental real.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: Imagem de Trend (Caricatura) -->
+  <section class="trend-section">
+    <div class="trend-header">
+      <span class="trend-badge">VIRAL</span>
+      <h2>Trend: "Crie uma caricatura de mim"</h2>
+    </div>
+    <p class="section-description">
+      Prompts como <em>"Crie uma caricatura de mim e do meu trabalho com base em tudo que você sabe sobre mim"</em>
+      estão viralizando. Mas qual o custo ambiental quando milhões fazem isso?
+    </p>
+
+    <div class="trend-card">
+      <div class="trend-example">
+        <div class="trend-prompt-box">
+          <span class="quote-icon">"</span>
+          <p>Crie uma caricatura de mim e do meu trabalho com base em tudo que você sabe sobre mim</p>
+        </div>
+      </div>
+
+      <div class="trend-cost-individual">
+        <h4>Custo de UMA imagem de trend:</h4>
+        <div class="trend-badges">
+          <div class="badge water">
+            <span class="badge-icon">💧</span>
+            <span class="badge-value">{{ trendImageWater }} L</span>
+            <span class="badge-label">de água</span>
+          </div>
+          <div class="badge energy">
+            <span class="badge-icon">⚡</span>
+            <span class="badge-value">{{ trendImageEnergy }} kWh</span>
+            <span class="badge-label">de energia</span>
+          </div>
+        </div>
+        <p class="trend-note">
+          Imagens personalizadas consomem <strong>10x mais</strong> que imagens simples porque
+          analisam suas fotos, processam contexto e geram múltiplas versões.
+        </p>
+      </div>
+
+      <div class="trend-global-impact">
+        <h4>Se todos os {{ formatWithSeparator(globalUsers() * 1000000) }} usuários de IA criarem sua caricatura:</h4>
+
+        <div class="trend-global-stats">
+          <div class="trend-stat">
+            <div class="trend-stat-value water">{{ formatLargeNumber(trendGlobalWater()) }}</div>
+            <div class="trend-stat-label">litros de água</div>
+          </div>
+          <div class="trend-stat">
+            <div class="trend-stat-value energy">{{ formatLargeNumber(trendGlobalEnergy()) }}</div>
+            <div class="trend-stat-label">kWh de energia</div>
+          </div>
+        </div>
+
+        <div class="trend-comparisons">
+          <h5>O impacto seria equivalente a:</h5>
+          <div class="trend-comparison-grid">
+            <div class="trend-item">
+              <span class="trend-item-icon">🏊</span>
+              <span class="trend-item-value">{{ formatWithSeparator(trendOlympicPools()) }}</span>
+              <span class="trend-item-label">piscinas olímpicas</span>
+            </div>
+            <div class="trend-item">
+              <span class="trend-item-icon">🏠</span>
+              <span class="trend-item-value">{{ formatLargeNumber(trendHousesPerYear()) }}</span>
+              <span class="trend-item-label">casas por 1 ano</span>
+            </div>
+            <div class="trend-item">
+              <span class="trend-item-icon">✈️</span>
+              <span class="trend-item-value">{{ formatLargeNumber(trendFlightsNYLA()) }}</span>
+              <span class="trend-item-label">voos NY-LA</span>
+            </div>
+            <div class="trend-item">
+              <span class="trend-item-icon">🌳</span>
+              <span class="trend-item-value">{{ formatLargeNumber(trendTrees()) }}</span>
+              <span class="trend-item-label">árvores para compensar</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trend-alert">
+          <span class="alert-icon">⚠️</span>
+          <p>Uma única trend viral pode consumir o equivalente a <strong>{{ formatWithSeparator(trendOlympicPools()) }} piscinas olímpicas</strong> de água em poucos dias!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: Teste Seu Prompt -->
+  <section class="test-prompt-section">
+    <h2>Teste Seu Prompt</h2>
+    <p class="section-description">
+      Digite um prompt real e veja o impacto que ele teria se todos os {{ formatWithSeparator(globalUsers() * 1000000) }} usuários de IA do mundo fizessem a mesma pergunta.
+    </p>
+
+    <div class="prompt-test-card">
+      <div class="textarea-wrapper">
+        <textarea
+          [ngModel]="realPrompt()"
+          (ngModelChange)="realPrompt.set($event)"
+          placeholder="Digite seu prompt aqui... Ex: Explique como funciona a fotossíntese de forma simples"
+          rows="4"
+        ></textarea>
+        <div class="char-counter" [class.warning]="realPromptLength() > 500">
+          {{ realPromptLength() }} caracteres
+        </div>
+      </div>
+
+      @if (realPromptLength() > 0) {
+        <div class="prompt-results">
+          <div class="individual-impact">
+            <h4>Custo deste prompt:</h4>
+            <div class="impact-badges">
+              <div class="badge water">
+                <span class="badge-icon">💧</span>
+                <span class="badge-value">{{ formatNumber(realPromptWater()) }} L</span>
+                <span class="badge-label">de água</span>
+              </div>
+              <div class="badge energy">
+                <span class="badge-icon">⚡</span>
+                <span class="badge-value">{{ formatNumber(realPromptEnergy()) }} kWh</span>
+                <span class="badge-label">de energia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="global-impact">
+            <h4>Se {{ formatWithSeparator(globalUsers() * 1000000) }} pessoas fizessem este prompt:</h4>
+
+            <div class="global-stats">
+              <div class="global-stat water">
+                <div class="global-stat-value">{{ formatLargeNumber(globalWaterImpact()) }}</div>
+                <div class="global-stat-label">litros de água</div>
+              </div>
+              <div class="global-stat energy">
+                <div class="global-stat-value">{{ formatLargeNumber(globalEnergyImpact()) }}</div>
+                <div class="global-stat-label">kWh de energia</div>
+              </div>
+            </div>
+
+            <div class="impact-comparisons">
+              <h5>Isso seria equivalente a:</h5>
+              <div class="impact-comparison-grid">
+                <div class="impact-item">
+                  <span class="impact-icon">🏊</span>
+                  <span class="impact-value">{{ formatNumber(olympicPools()) }}</span>
+                  <span class="impact-label">piscinas olímpicas</span>
+                </div>
+                <div class="impact-item">
+                  <span class="impact-icon">🏠</span>
+                  <span class="impact-value">{{ formatLargeNumber(housesPerYear()) }}</span>
+                  <span class="impact-label">casas abastecidas por 1 ano</span>
+                </div>
+                <div class="impact-item">
+                  <span class="impact-icon">🌫️</span>
+                  <span class="impact-value">{{ formatLargeNumber(co2Emissions()) }} kg</span>
+                  <span class="impact-label">de CO₂ emitido</span>
+                </div>
+                <div class="impact-item">
+                  <span class="impact-icon">🌳</span>
+                  <span class="impact-value">{{ formatLargeNumber(treesNeeded()) }}</span>
+                  <span class="impact-label">árvores para compensar (1 ano)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      } @else {
+        <div class="prompt-placeholder">
+          <div class="placeholder-icon">✍️</div>
+          <p>Digite um prompt acima para ver o impacto ambiental</p>
+        </div>
+      }
+    </div>
+
+    <div class="global-context">
+      <div class="context-card">
+        <div class="context-icon">🌍</div>
+        <div class="context-info">
+          <h5>Contexto Global</h5>
+          <p>
+            Estima-se que existam <strong>{{ formatWithSeparator(globalUsers() * 1000000) }}</strong> usuários ativos de ferramentas de IA no mundo.
+            Se cada um fizer apenas <strong>10 prompts por dia</strong>, são <strong>{{ formatWithSeparator(globalUsers() * 10000000) }}</strong> consultas diárias!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculadoras -->
+  <div class="calculators">
+    <!-- Calculadora de Prompts -->
+    <section class="calculator-card prompt-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+          </svg>
+        </div>
+        <h2>Calcule seu uso diário de prompts</h2>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group">
+          <label>Tamanho médio do prompt (caracteres)</label>
+          <input
+            type="range"
+            [min]="10"
+            [max]="1000"
+            [ngModel]="promptLength()"
+            (ngModelChange)="promptLength.set($event)"
+          />
+          <div class="range-labels">
+            <span>Curto</span>
+            <span class="current-value">{{ promptLength() }} chars</span>
+            <span>Longo</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Prompts por dia</label>
+          <input
+            type="number"
+            [min]="1"
+            [max]="1000"
+            [ngModel]="promptsPerDay()"
+            (ngModelChange)="promptsPerDay.set($event)"
+          />
+        </div>
+
+        <div class="results">
+          <h4>Impacto por consulta:</h4>
+          <div class="result-row">
+            <span class="result-icon water">💧</span>
+            <span class="result-label">Água:</span>
+            <span class="result-value">{{ formatNumber(promptWaterPerQuery()) }} L</span>
+          </div>
+          <div class="result-row">
+            <span class="result-icon energy">⚡</span>
+            <span class="result-label">Energia:</span>
+            <span class="result-value">{{ formatNumber(promptEnergyPerQuery()) }} kWh</span>
+          </div>
+
+          <h4>Impacto diário:</h4>
+          <div class="result-row highlight">
+            <span class="result-icon water">💧</span>
+            <span class="result-label">Água:</span>
+            <span class="result-value">{{ formatNumber(promptDailyWater()) }} L</span>
+          </div>
+          <div class="result-row highlight">
+            <span class="result-icon energy">⚡</span>
+            <span class="result-label">Energia:</span>
+            <span class="result-value">{{ formatNumber(promptDailyEnergy()) }} kWh</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculadora de Imagens -->
+    <section class="calculator-card image-card">
+      <div class="card-header">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+          </svg>
+        </div>
+        <h2>Quanto custa gerar minha imagem?</h2>
+      </div>
+
+      <div class="card-body">
+        <div class="input-group">
+          <label>Qualidade da imagem</label>
+          <div class="quality-buttons">
+            <button
+              [class.active]="imageQuality() === 'low'"
+              (click)="imageQuality.set('low')"
+            >
+              Baixa
+            </button>
+            <button
+              [class.active]="imageQuality() === 'medium'"
+              (click)="imageQuality.set('medium')"
+            >
+              Média
+            </button>
+            <button
+              [class.active]="imageQuality() === 'high'"
+              (click)="imageQuality.set('high')"
+            >
+              Alta
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Imagens geradas por dia</label>
+          <input
+            type="number"
+            [min]="1"
+            [max]="100"
+            [ngModel]="imagesPerDay()"
+            (ngModelChange)="imagesPerDay.set($event)"
+          />
+        </div>
+
+        <div class="results">
+          <h4>Impacto por imagem:</h4>
+          <div class="result-row">
+            <span class="result-icon water">💧</span>
+            <span class="result-label">Água:</span>
+            <span class="result-value">{{ formatNumber(imageWaterPerGen()) }} L</span>
+          </div>
+          <div class="result-row">
+            <span class="result-icon energy">⚡</span>
+            <span class="result-label">Energia:</span>
+            <span class="result-value">{{ formatNumber(imageEnergyPerGen()) }} kWh</span>
+          </div>
+
+          <h4>Impacto diário:</h4>
+          <div class="result-row highlight">
+            <span class="result-icon water">💧</span>
+            <span class="result-label">Água:</span>
+            <span class="result-value">{{ formatNumber(imageDailyWater()) }} L</span>
+          </div>
+          <div class="result-row highlight">
+            <span class="result-icon energy">⚡</span>
+            <span class="result-label">Energia:</span>
+            <span class="result-value">{{ formatNumber(imageDailyEnergy()) }} kWh</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Resumo Total -->
+  <section class="summary-section">
+    <h2>Seu Impacto Total</h2>
+
+    <div class="summary-grid">
+      <div class="summary-card daily">
+        <h3>Diário</h3>
+        <div class="summary-stats">
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalDailyWater()) }}</span>
+            <span class="stat-unit">litros de água</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalDailyEnergy()) }}</span>
+            <span class="stat-unit">kWh de energia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card monthly">
+        <h3>Mensal</h3>
+        <div class="summary-stats">
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalMonthlyWater()) }}</span>
+            <span class="stat-unit">litros de água</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalMonthlyEnergy()) }}</span>
+            <span class="stat-unit">kWh de energia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card yearly">
+        <h3>Anual</h3>
+        <div class="summary-stats">
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalYearlyWater()) }}</span>
+            <span class="stat-unit">litros de água</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">{{ formatNumber(totalYearlyEnergy()) }}</span>
+            <span class="stat-unit">kWh de energia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparações -->
+  <section class="comparisons-section">
+    <h2>Isso equivale a...</h2>
+
+    <div class="comparisons-grid">
+      <div class="comparison-card">
+        <div class="comparison-icon">🚿</div>
+        <div class="comparison-value">{{ showersEquivalent() }}</div>
+        <div class="comparison-label">banhos de 5 minutos por ano</div>
+      </div>
+
+      <div class="comparison-card">
+        <div class="comparison-icon">📱</div>
+        <div class="comparison-value">{{ phonesCharged() }}</div>
+        <div class="comparison-label">cargas de celular por ano</div>
+      </div>
+
+      <div class="comparison-card">
+        <div class="comparison-icon">🚗</div>
+        <div class="comparison-value">{{ drivingKm() }}</div>
+        <div class="comparison-label">km em carro elétrico por ano</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dicas -->
+  <section class="tips-section">
+    <h2>Dicas para uso consciente</h2>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-number">1</div>
+        <h4>Seja específico</h4>
+        <p>Prompts bem elaborados economizam re-trabalho e consultas adicionais.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-number">2</div>
+        <h4>Reutilize respostas</h4>
+        <p>Salve informações úteis para não precisar perguntar novamente.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-number">3</div>
+        <h4>Avalie a necessidade</h4>
+        <p>Pergunte-se se realmente precisa gerar aquela imagem ou fazer aquela consulta.</p>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-number">4</div>
+        <h4>Pense antes de seguir trends</h4>
+        <p>Trends virais de IA podem ter impacto ambiental massivo quando milhões participam.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-leaf">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+      </svg>
+    </div>
+    <p>
+      Os valores apresentados são estimativas baseadas em estudos sobre consumo energético
+      e hídrico de data centers de IA. O impacto real pode variar conforme o provedor e infraestrutura.
+    </p>
+    <p class="sources">
+      Fontes: Pesquisas da Universidade da Califórnia, relatórios de sustentabilidade de Big Techs,
+      e estudos sobre eficiência energética de GPUs.
+    </p>
+  </footer>
+</main>

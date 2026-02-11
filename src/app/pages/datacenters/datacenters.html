@@ -1,0 +1,498 @@
+<main class="container">
+  <!-- Header -->
+  <header class="page-header">
+    <div class="header-content">
+      <div class="header-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
+        </svg>
+      </div>
+      <h1 class="title">Impacto nas Cidades</h1>
+      <p class="subtitle">
+        Como os datacenters de IA afetam as comunidades locais que os abrigam
+      </p>
+    </div>
+  </header>
+
+  <!-- Introdução -->
+  <section class="intro-section">
+    <div class="intro-card alert">
+      <div class="intro-icon">⚠️</div>
+      <div class="intro-content">
+        <h3>O Custo Invisível da IA</h3>
+        <p>
+          Enquanto usamos ChatGPT, Midjourney e outras IAs do conforto de nossas casas,
+          comunidades ao redor do mundo enfrentam escassez de água, energia cara e problemas
+          ambientais causados pelos datacenters que processam nossas consultas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estatísticas Globais -->
+  <section class="global-stats-section">
+    <h2>O Tamanho do Problema</h2>
+    <div class="stats-grid">
+      <div class="stat-card water">
+        <div class="stat-icon">💧</div>
+        <div class="stat-value">{{ globalStats.totalWaterUsage }}</div>
+        <div class="stat-label">Água consumida por datacenters globalmente</div>
+      </div>
+      <div class="stat-card energy">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-value">{{ globalStats.totalEnergy }}</div>
+        <div class="stat-label">Energia consumida (dobra a cada 4 anos)</div>
+      </div>
+      <div class="stat-card carbon">
+        <div class="stat-icon">🌫️</div>
+        <div class="stat-value">{{ globalStats.carbonEmissions }}</div>
+        <div class="stat-label">Emissões de CO₂ por ano</div>
+      </div>
+      <div class="stat-card growth">
+        <div class="stat-icon">📈</div>
+        <div class="stat-value">{{ globalStats.projectedEnergy2027 }}</div>
+        <div class="stat-label">Projeção de consumo para 2027</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impactos Sociais -->
+  <section class="social-impacts-section">
+    <h2>Como Isso Afeta as Pessoas</h2>
+    <p class="section-description">
+      Os impactos dos datacenters vão muito além do meio ambiente. Comunidades inteiras
+      sofrem consequências diretas em sua qualidade de vida.
+    </p>
+
+    <div class="impacts-grid">
+      @for (impact of socialImpacts; track impact.title) {
+        <div class="impact-card">
+          <div class="impact-icon">{{ impact.icon }}</div>
+          <h4>{{ impact.title }}</h4>
+          <p>{{ impact.description }}</p>
+          <ul class="impact-examples">
+            @for (example of impact.examples; track example) {
+              <li>{{ example }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Cidades Afetadas -->
+  <section class="cities-section">
+    <h2>Cidades Afetadas</h2>
+    <p class="section-description">
+      Conheça algumas das cidades ao redor do mundo que enfrentam o impacto direto dos
+      datacenters de grandes empresas de tecnologia.
+    </p>
+
+    <div class="cities-grid">
+      @for (city of affectedCities; track city.name) {
+        <div class="city-card" (click)="selectCity(city)">
+          <div class="city-header">
+            <h4>{{ city.name }}</h4>
+            <span class="city-country">{{ city.country }}</span>
+          </div>
+          <div class="city-companies">
+            @for (company of city.companies; track company) {
+              <span class="company-tag">{{ company }}</span>
+            }
+          </div>
+          <div class="city-stats">
+            <div class="city-stat">
+              <span class="stat-icon">💧</span>
+              <span>{{ city.waterUsage }}</span>
+            </div>
+            <div class="city-stat">
+              <span class="stat-icon">👥</span>
+              <span>{{ city.population }}</span>
+            </div>
+          </div>
+          <div class="city-preview">
+            <p>{{ city.impact }}</p>
+          </div>
+          <button class="city-btn">Ver detalhes</button>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Modal de detalhes da cidade -->
+  @if (selectedCity()) {
+    <div class="city-modal-overlay" (click)="closeDetail()">
+      <div class="city-modal" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="closeDetail()">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          </svg>
+        </button>
+
+        <div class="modal-header">
+          <h3>{{ selectedCity()?.name }}</h3>
+          <span class="modal-country">{{ selectedCity()?.country }}</span>
+        </div>
+
+        <div class="modal-companies">
+          <h5>Empresas presentes:</h5>
+          <div class="companies-list">
+            @for (company of selectedCity()?.companies; track company) {
+              <span class="company-tag large">{{ company }}</span>
+            }
+          </div>
+        </div>
+
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <div class="stat-icon">💧</div>
+            <div class="stat-info">
+              <span class="stat-label">Consumo de Água</span>
+              <span class="stat-value">{{ selectedCity()?.waterUsage }}</span>
+            </div>
+          </div>
+          <div class="modal-stat">
+            <div class="stat-icon">⚡</div>
+            <div class="stat-info">
+              <span class="stat-label">Consumo de Energia</span>
+              <span class="stat-value">{{ selectedCity()?.energyUsage }}</span>
+            </div>
+          </div>
+          <div class="modal-stat">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <span class="stat-label">População</span>
+              <span class="stat-value">{{ selectedCity()?.population }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-impact">
+          <h5>Impacto na Comunidade:</h5>
+          <p>{{ selectedCity()?.impact }}</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- O Que Essas Cidades Têm em Comum -->
+  <section class="common-pattern-section">
+    <h2>O Que Essas Cidades Têm em Comum?</h2>
+
+    <div class="pattern-card">
+      <p class="pattern-intro">
+        Não é coincidência que grandes empresas de tecnologia escolham essas cidades.
+        Existe um padrão claro na seleção de locais para datacenters:
+      </p>
+
+      <div class="pattern-grid">
+        <div class="pattern-item">
+          <div class="pattern-icon">💧</div>
+          <h4>Água Abundante (por enquanto)</h4>
+          <p>Regiões com rios, represas ou aquíferos que podem fornecer milhões de litros diários para resfriamento.</p>
+        </div>
+
+        <div class="pattern-item">
+          <div class="pattern-icon">⚡</div>
+          <h4>Energia Barata</h4>
+          <p>Proximidade com hidrelétricas ou fontes de energia renovável que reduzem custos operacionais.</p>
+        </div>
+
+        <div class="pattern-item">
+          <div class="pattern-icon">🌡️</div>
+          <h4>Clima Favorável</h4>
+          <p>Temperaturas amenas que reduzem a necessidade de refrigeração artificial.</p>
+        </div>
+
+        <div class="pattern-item">
+          <div class="pattern-icon">💰</div>
+          <h4>Incentivos Fiscais</h4>
+          <p>Governos locais oferecem isenções de impostos e subsídios em troca da promessa de "desenvolvimento".</p>
+        </div>
+
+        <div class="pattern-item">
+          <div class="pattern-icon">📜</div>
+          <h4>Regulação Fraca</h4>
+          <p>Leis ambientais permissivas ou falta de fiscalização sobre consumo de recursos naturais.</p>
+        </div>
+
+        <div class="pattern-item">
+          <div class="pattern-icon">🏘️</div>
+          <h4>Comunidades Vulneráveis</h4>
+          <p>Populações com pouco poder político para resistir ou negociar termos mais justos.</p>
+        </div>
+      </div>
+
+      <div class="pattern-alert">
+        <span class="alert-icon">🎯</span>
+        <p>
+          <strong>O padrão é claro:</strong> empresas buscam locais onde podem extrair o máximo de recursos
+          naturais com o mínimo de resistência. Quando os recursos se esgotam ou a comunidade se organiza,
+          simplesmente expandem para novas regiões.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Caso Uberlândia -->
+  <section class="uberlandia-section">
+    <h2>Alerta Brasil: O Caso Uberlândia</h2>
+
+    <div class="uberlandia-card">
+      <div class="uberlandia-header">
+        <div class="uberlandia-title">
+          <h4>Uberlândia, Minas Gerais</h4>
+          <span>A próxima vítima do boom de datacenters?</span>
+        </div>
+      </div>
+
+      <div class="uberlandia-context">
+        <p>
+          Em 2024, foi anunciada a construção de um mega datacenter em Uberlândia, Minas Gerais.
+          A cidade foi escolhida por atender todos os critérios que as Big Techs procuram:
+        </p>
+
+        <div class="uberlandia-criteria">
+          <div class="criteria-item">
+            <span class="criteria-icon">💧</span>
+            <span>Proximidade com o Rio Paranaíba e aquífero Guarani</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-icon">⚡</span>
+            <span>Energia hidrelétrica abundante e barata</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-icon">🌐</span>
+            <span>Hub de fibra óptica do interior do Brasil</span>
+          </div>
+          <div class="criteria-item">
+            <span class="criteria-icon">🏛️</span>
+            <span>Governo local oferecendo incentivos fiscais</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="jobs-myth">
+        <h5>A Ilusão dos Empregos</h5>
+
+        <div class="myth-content">
+          <div class="myth-promise">
+            <h6>O Que Prometem</h6>
+            <ul>
+              <li>"Milhares de empregos diretos e indiretos"</li>
+              <li>"Desenvolvimento tecnológico para a região"</li>
+              <li>"Investimentos bilionários na economia local"</li>
+              <li>"Capacitação da mão de obra regional"</li>
+            </ul>
+          </div>
+
+          <div class="myth-reality">
+            <h6>A Realidade</h6>
+            <ul>
+              <li><strong>50-150 empregos</strong> diretos permanentes (altamente especializados)</li>
+              <li>Maioria dos técnicos vem de fora da cidade</li>
+              <li>Empregos de construção são temporários (12-18 meses)</li>
+              <li>Automação crescente reduz necessidade de funcionários</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="jobs-comparison">
+          <div class="comparison-box negative">
+            <div class="comparison-number">~100</div>
+            <div class="comparison-text">Empregos criados pelo datacenter</div>
+          </div>
+          <div class="comparison-vs">vs</div>
+          <div class="comparison-box positive">
+            <div class="comparison-number">Milhares</div>
+            <div class="comparison-text">Empregos na agricultura que dependem da água</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uberlandia-risks">
+        <h5>Riscos Para Uberlândia</h5>
+
+        <div class="risks-grid">
+          <div class="risk-item">
+            <span class="risk-icon">🚰</span>
+            <div class="risk-content">
+              <h6>Competição por Água</h6>
+              <p>A região já enfrenta conflitos hídricos entre agronegócio e abastecimento urbano. Um datacenter consumindo milhões de litros diários pode agravar a crise.</p>
+            </div>
+          </div>
+
+          <div class="risk-item">
+            <span class="risk-icon">💡</span>
+            <div class="risk-content">
+              <h6>Pressão na Rede Elétrica</h6>
+              <p>Datacenters podem consumir a energia equivalente a uma cidade de 50.000 habitantes. Isso pode significar tarifas mais altas para todos.</p>
+            </div>
+          </div>
+
+          <div class="risk-item">
+            <span class="risk-icon">🌾</span>
+            <div class="risk-content">
+              <h6>Impacto no Agronegócio</h6>
+              <p>Uberlândia é polo agrícola. Se a água for priorizada para datacenters, agricultores podem perder safras e empregos reais serão destruídos.</p>
+            </div>
+          </div>
+
+          <div class="risk-item">
+            <span class="risk-icon">🏠</span>
+            <div class="risk-content">
+              <h6>Especulação Imobiliária</h6>
+              <p>A chegada de empresas de tecnologia já causa aumento de aluguéis, expulsando moradores de baixa renda de seus bairros.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="uberlandia-alert">
+        <div class="alert-header">
+          <span class="alert-icon">⚠️</span>
+          <h5>O Que a História nos Ensina</h5>
+        </div>
+        <p>
+          <strong>The Dalles, Oregon</strong> também recebeu o Google com promessas de prosperidade.
+          18 anos depois, a cidade luta para manter água para seus moradores enquanto o datacenter
+          continua se expandindo. <strong>Uberlândia pode seguir o mesmo caminho.</strong>
+        </p>
+        <p class="alert-question">
+          Vale a pena trocar recursos naturais essenciais por ~100 empregos e a promessa
+          vaga de "desenvolvimento tecnológico"?
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Caso Real: The Dalles -->
+  <section class="case-study-section">
+    <h2>Caso Real: The Dalles, Oregon</h2>
+
+    <div class="case-study-card">
+      <div class="case-header">
+        <div class="case-icon">📍</div>
+        <div class="case-title">
+          <h4>Uma cidade de 15.000 habitantes vs. Google</h4>
+          <span>A história que exemplifica o problema</span>
+        </div>
+      </div>
+
+      <div class="case-content">
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-year">2006</div>
+            <div class="timeline-content">
+              <h5>Chegada do Google</h5>
+              <p>Google anuncia construção de datacenter em The Dalles, prometendo empregos e desenvolvimento econômico.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2021</div>
+            <div class="timeline-content">
+              <h5>Expansão Massiva</h5>
+              <p>Datacenter consome 25% de toda a água da cidade. Moradores começam a notar restrições.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-content">
+              <h5>Seca Severa</h5>
+              <p>Durante ondas de calor, enquanto residentes enfrentam racionamento de água, datacenter continua operando normalmente.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-content">
+              <h5>Protestos</h5>
+              <p>Moradores protestam contra nova expansão. Google pede mais água, mas comunidade questiona a sustentabilidade.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-year">2024</div>
+            <div class="timeline-content">
+              <h5>Boom da IA</h5>
+              <p>Com a explosão do ChatGPT e IA generativa, demanda por processamento (e água) dispara ainda mais.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-quote">
+        <blockquote>
+          "Nós estamos literalmente secando nossa cidade para que pessoas em outros lugares possam perguntar
+          ao ChatGPT qual a melhor receita de bolo."
+        </blockquote>
+        <cite>— Residente de The Dalles, 2024</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- O Que Podemos Fazer -->
+  <section class="actions-section">
+    <h2>O Que Podemos Fazer</h2>
+
+    <div class="actions-grid">
+      <div class="action-card">
+        <div class="action-number">1</div>
+        <h4>Use IA com Consciência</h4>
+        <p>Cada consulta tem um custo. Pense se realmente precisa fazer aquela pergunta ou gerar aquela imagem.</p>
+      </div>
+
+      <div class="action-card">
+        <div class="action-number">2</div>
+        <h4>Exija Transparência</h4>
+        <p>Pressione empresas de tecnologia para divulgar seu consumo real de água e energia.</p>
+      </div>
+
+      <div class="action-card">
+        <div class="action-number">3</div>
+        <h4>Apoie Legislação</h4>
+        <p>Apoie leis que obriguem datacenters a usar energia renovável e reciclar água.</p>
+      </div>
+
+      <div class="action-card">
+        <div class="action-number">4</div>
+        <h4>Compartilhe Conhecimento</h4>
+        <p>Muitas pessoas não sabem do impacto ambiental da IA. Espalhe essa informação.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-card">
+      <div class="cta-icon">🌱</div>
+      <h3>Calcule Seu Impacto</h3>
+      <p>Descubra quanto de água e energia seus prompts e imagens geradas consomem.</p>
+      <a routerLink="/" class="cta-button">
+        <span>Ir para Calculadora</span>
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-leaf">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+      </svg>
+    </div>
+    <p>
+      Dados compilados de relatórios públicos de empresas de tecnologia, estudos acadêmicos
+      e reportagens investigativas sobre o impacto ambiental de datacenters.
+    </p>
+    <p class="sources">
+      Fontes: The Washington Post, The Guardian, Wired, MIT Technology Review,
+      e relatórios de sustentabilidade de Google, Microsoft, Meta e Amazon.
+    </p>
+  </footer>
+</main>
