@@ -36,6 +36,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/quanto-meu-prompt-custa/",
               "budgets": [
                 {
                   "type": "initial",
@@ -72,6 +73,9 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
